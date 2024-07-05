@@ -5,6 +5,7 @@ import 'package:user_directory/common/custom_text_field_title.dart';
 import 'package:user_directory/common/extensions.dart';
 import 'package:user_directory/common/stringutils.dart';
 import 'package:user_directory/di/di_container.dart';
+import 'package:user_directory/ui/home/bloc/home_bloc.dart';
 import 'package:user_directory/ui/home/home_screen.dart';
 import 'package:user_directory/ui/login/bloc/login_bloc.dart';
 import 'package:user_directory/ui/login/bloc/login_event.dart';
@@ -31,7 +32,10 @@ class LoginScreen extends StatelessWidget {
               listener: (context, state) {
                 if (state.isSuccess) {
                   Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (context) => HomeScreen()),
+                      MaterialPageRoute(builder: (context) => BlocProvider(
+                        create: (context) => locator<HomeBloc>(),
+                        child: const HomeScreen(),
+                      )),
                       (route) => true);
                 }
               },

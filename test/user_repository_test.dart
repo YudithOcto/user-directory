@@ -1,5 +1,6 @@
 import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:user_directory/common/constants.dart';
 import 'package:user_directory/data/local/storage_service.dart';
 import 'package:user_directory/data/user/model/user_dto.dart';
 import 'package:user_directory/data/user/user_remote_data_source.dart';
@@ -85,7 +86,8 @@ void main() {
 
       // Assert
       expect(result, equals(expectedToken));
-      verify(mockStorageService.saveData('token', 'test_token')).called(1);
+      verify(mockStorageService.saveData(Constants.bearerToken, 'test_token'))
+          .called(1);
     });
 
     test('throws an exception on error', () async {
@@ -98,7 +100,8 @@ void main() {
         () async => await userRepository.login("email", "password"),
         throwsA(isA<Exception>()),
       );
-      verifyNever(mockStorageService.saveData('token', 'test_token'));
+      verifyNever(
+          mockStorageService.saveData(Constants.bearerToken, 'test_token'));
     });
   });
 }

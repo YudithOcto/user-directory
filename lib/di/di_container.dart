@@ -49,6 +49,6 @@ Future<void> setupLocator() async {
 
   // Register Bloc
   locator
-      .registerSingleton<LoginBloc>(LoginBloc(locator<UserRemoteDataSource>()));
-  locator.registerSingleton<HomeBloc>(HomeBloc());
+      .registerSingleton<LoginBloc>(LoginBloc(locator<UserRepository>()));
+  locator.registerSingleton<HomeBloc>(HomeBloc(locator<UserRepository>()));
 }

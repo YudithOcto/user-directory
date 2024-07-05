@@ -7,4 +7,10 @@ abstract class HomeEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class ToggleView extends HomeEvent {}
+class LoadDataEvent extends HomeEvent {
+  final int nextPage;
+  const LoadDataEvent({required this.nextPage});
+
+  @override
+  List<Object> get props => [];
+}

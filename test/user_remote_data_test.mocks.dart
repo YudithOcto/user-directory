@@ -23,7 +23,7 @@ import 'user_remote_data_test.dart' as _i3;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeResponse_0<T1> extends _i1.SmartFake implements _i2.Response<T1> {
+class _FakeResponse_0<T> extends _i1.SmartFake implements _i2.Response<T> {
   _FakeResponse_0(
     Object parent,
     Invocation parentInvocation,
@@ -43,7 +43,7 @@ class MockMockNetworkService extends _i1.Mock
   }
 
   @override
-  _i4.Future<_i2.Response<T>> get<T>(
+  _i4.Future<_i2.Response<dynamic>> get(
     String? url, {
     Map<String, dynamic>? queryParameters,
   }) =>
@@ -53,7 +53,8 @@ class MockMockNetworkService extends _i1.Mock
           [url],
           {#queryParameters: queryParameters},
         ),
-        returnValue: _i4.Future<_i2.Response<T>>.value(_FakeResponse_0<T>(
+        returnValue:
+            _i4.Future<_i2.Response<dynamic>>.value(_FakeResponse_0<dynamic>(
           this,
           Invocation.method(
             #get,
@@ -61,12 +62,12 @@ class MockMockNetworkService extends _i1.Mock
             {#queryParameters: queryParameters},
           ),
         )),
-      ) as _i4.Future<_i2.Response<T>>);
+      ) as _i4.Future<_i2.Response<dynamic>>);
 
   @override
-  _i4.Future<_i2.Response<T>> post<T>(
+  _i4.Future<_i2.Response<dynamic>> post(
     String? url, {
-    dynamic data,
+    Map<String, dynamic>? data,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -74,7 +75,8 @@ class MockMockNetworkService extends _i1.Mock
           [url],
           {#data: data},
         ),
-        returnValue: _i4.Future<_i2.Response<T>>.value(_FakeResponse_0<T>(
+        returnValue:
+            _i4.Future<_i2.Response<dynamic>>.value(_FakeResponse_0<dynamic>(
           this,
           Invocation.method(
             #post,
@@ -82,12 +84,12 @@ class MockMockNetworkService extends _i1.Mock
             {#data: data},
           ),
         )),
-      ) as _i4.Future<_i2.Response<T>>);
+      ) as _i4.Future<_i2.Response<dynamic>>);
 
   @override
-  _i4.Future<_i2.Response<T>> put<T>(
+  _i4.Future<_i2.Response<dynamic>> put(
     String? url, {
-    dynamic data,
+    Map<String, dynamic>? data,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -95,7 +97,8 @@ class MockMockNetworkService extends _i1.Mock
           [url],
           {#data: data},
         ),
-        returnValue: _i4.Future<_i2.Response<T>>.value(_FakeResponse_0<T>(
+        returnValue:
+            _i4.Future<_i2.Response<dynamic>>.value(_FakeResponse_0<dynamic>(
           this,
           Invocation.method(
             #put,
@@ -103,12 +106,12 @@ class MockMockNetworkService extends _i1.Mock
             {#data: data},
           ),
         )),
-      ) as _i4.Future<_i2.Response<T>>);
+      ) as _i4.Future<_i2.Response<dynamic>>);
 
   @override
-  _i4.Future<_i2.Response<T>> delete<T>(
+  _i4.Future<_i2.Response<dynamic>> delete(
     String? url, {
-    dynamic data,
+    Map<String, dynamic>? data,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -116,7 +119,8 @@ class MockMockNetworkService extends _i1.Mock
           [url],
           {#data: data},
         ),
-        returnValue: _i4.Future<_i2.Response<T>>.value(_FakeResponse_0<T>(
+        returnValue:
+            _i4.Future<_i2.Response<dynamic>>.value(_FakeResponse_0<dynamic>(
           this,
           Invocation.method(
             #delete,
@@ -124,5 +128,5 @@ class MockMockNetworkService extends _i1.Mock
             {#data: data},
           ),
         )),
-      ) as _i4.Future<_i2.Response<T>>);
+      ) as _i4.Future<_i2.Response<dynamic>>);
 }

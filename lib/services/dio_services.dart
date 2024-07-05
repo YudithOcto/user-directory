@@ -32,41 +32,41 @@ class DioService implements NetworkService {
   }
 
   @override
-  Future<Response<T>> get<T>(String url,
+  Future<Response<dynamic>> get(String url,
       {Map<String, dynamic>? queryParameters}) async {
     try {
       final response = await _dio.get(url, queryParameters: queryParameters);
-      return response.data;
+      return response;
     } catch (e) {
       rethrow;
     }
   }
 
   @override
-  Future<Response<T>> post<T>(String url, {data}) async {
-    try {
-      final response = await _dio.post(url, data: data);
-      return response.data;
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  @override
-  Future<Response<T>> put<T>(String url, {data}) async {
+  Future<Response<dynamic>> put(String url, {data}) async {
     try {
       final response = await _dio.put(url, data: data);
-      return response.data;
+      return response;
     } catch (e) {
       rethrow;
     }
   }
 
   @override
-  Future<Response<T>> delete<T>(String url, {data}) async {
+  Future<Response<dynamic>> delete(String url, {data}) async {
     try {
       final response = await _dio.delete(url);
-      return response.data;
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<Response<dynamic>> post(String url, {data}) async {
+    try {
+      final response = await _dio.post(url, data: data);
+      return response;
     } catch (e) {
       rethrow;
     }

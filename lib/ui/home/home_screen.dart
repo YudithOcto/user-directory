@@ -5,57 +5,66 @@ import 'package:user_directory/ui/home/bloc/home_bloc.dart';
 import 'package:user_directory/ui/home/bloc/home_event.dart';
 import 'package:user_directory/ui/home/bloc/home_state.dart';
 
-class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key});
-  final List<User> users = [
-    User(
-        firstName: 'John',
-        lastName: 'Doe',
-        avatar: 'https://i.pravatar.cc/150?img=1',
-        email: 'john.doe@example.com',
-        id: 0),
-    User(
-        firstName: 'Jane',
-        lastName: 'Smith',
-        avatar: 'https://i.pravatar.cc/150?img=2',
-        email: 'jane.smith@example.com',
-        id: 0),
-    User(
-        firstName: 'Robert',
-        lastName: 'Johnson',
-        avatar: 'https://i.pravatar.cc/150?img=3',
-        email: 'robert.johnson@example.com',
-        id: 0),
-    // Add more users here
-  ];
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<HomeBloc>(context).add(const LoadDataEvent(nextPage: 1));
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('User List'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.swap_vert),
-            onPressed: () {
-              context.read<HomeBloc>().add(ToggleView());
-            },
-          ),
-        ],
+        centerTitle: false,
+        title: const Text('Beranda'),
+        automaticallyImplyLeading: false,
       ),
       body: BlocConsumer<HomeBloc, HomeState>(
         listener: (context, state) {},
         builder: (buildContext, state) {
-          return _buildListView();
+          if (state is LoadedHomeState) {
+            return _buildListView(
+                buildContext, state.userData, state.isLastPage, onTap: () {
+              context
+                  .read<HomeBloc>()
+                  .add(LoadDataEvent(nextPage: state.currentPage + 1));
+            });
+          } else {
+            return Container();
+          }
         },
       ),
     );
   }
 
-  Widget _buildListView() {
-    return ListView.builder(
-      itemCount: users.length,
+  Widget _buildListView(
+      BuildContext context, List<User> users, bool isLastIndex,
+      {required VoidCallback onTap}) {
+    return ListView.separated(
+      padding: const EdgeInsets.all(16.0),
+      separatorBuilder: (_, __) => const Divider(),
+      itemCount: users.length + (!isLastIndex ? 1 : 0),
+      shrinkWrap: true,
       itemBuilder: (context, index) {
+        if (!isLastIndex && index == users.length) {
+          return Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: ElevatedButton(
+              onPressed: () {
+                onTap();
+              },
+              child: Text("load More"),
+            ),
+          );
+        }
         return ListTile(
           leading: CircleAvatar(
             backgroundImage: NetworkImage(users[index].avatar),

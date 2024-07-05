@@ -1,20 +1,47 @@
 import 'package:equatable/equatable.dart';
+import 'package:user_directory/domain/model/user.dart';
 
-class HomeState extends Equatable {
-  final bool isListView;
+abstract class HomeState extends Equatable {
+  const HomeState();
+}
 
-  const HomeState({required this.isListView});
+class InitialHomeState extends HomeState {
+  @override
+  List<Object?> get props => [];
+}
 
-  factory HomeState.initial() {
-    return const HomeState(isListView: true);
-  }
+class LoadedHomeState extends HomeState {
+  final List<User> userData;
+  final int currentPage;
+  final bool isLastPage;
+  final bool isPaginationLoading;
 
-  HomeState copyWith({bool? isListView}) {
-    return HomeState(
-      isListView: isListView ?? this.isListView,
+  const LoadedHomeState({
+      required this.userData, required this.currentPage, required this.isLastPage, required this.isPaginationLoading});
+
+  LoadedHomeState copyWith(
+      {List<User>? userData,
+      int? currentPage,
+      bool? isLastPage,
+      bool? isPaginationLoading}) {
+    return LoadedHomeState(
+      userData: userData ?? this.userData,
+      currentPage: currentPage ?? this.currentPage,
+      isLastPage: isLastPage ?? this.isLastPage,
+      isPaginationLoading: isPaginationLoading ?? this.isPaginationLoading,
     );
   }
 
   @override
-  List<Object> get props => [isListView];
+  List<Object> get props => [userData, currentPage, isLastPage, isPaginationLoading];
+}
+
+class LoadingState extends HomeState {
+  @override
+  List<Object?> get props => [];
+}
+
+class FailedHomeState extends HomeState {
+  @override
+  List<Object?> get props => [];
 }

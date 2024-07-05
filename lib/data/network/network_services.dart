@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 
 abstract class NetworkService {
-  Future<Response<T>> get<T>(String url,
+  Future<Response<dynamic>> get(String url,
       {Map<String, dynamic>? queryParameters});
-  Future<Response<T>> post<T>(String url, {dynamic data});
-  Future<Response<T>> put<T>(String url, {dynamic data});
-  Future<Response<T>> delete<T>(String url, {dynamic data});
+  Future<Response<dynamic>> post(String url, {Map<String, dynamic>? data});
+  Future<Response<dynamic>> put(String url, {Map<String, dynamic>? data});
+  Future<Response<dynamic>> delete(String url, {Map<String, dynamic>? data});
 }

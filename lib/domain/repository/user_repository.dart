@@ -1,3 +1,4 @@
+import 'package:user_directory/common/constants.dart';
 import 'package:user_directory/common/extensions.dart';
 import 'package:user_directory/data/local/storage_service.dart';
 import 'package:user_directory/data/user/user_remote_data_source.dart';
@@ -26,7 +27,7 @@ class DefaultUserRepository extends UserRepository {
     try {
       String token = await _userRemoteDataSource.login(email, password);
       if (token.isNotNullOrEmpty) {
-        _localService.saveData("token", token);
+        _localService.saveData(Constants.bearerToken, token);
       }
       return token;
     } catch (e) {

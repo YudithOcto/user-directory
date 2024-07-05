@@ -22,8 +22,7 @@ class DefaultUserRemoteDataSource extends UserRemoteDataSource {
         "email": email,
         "password": password,
       });
-      String? token = result.data['token'];
-      return token ?? "";
+      return result.data['token'];
     } catch (e) {
       rethrow;
     }
